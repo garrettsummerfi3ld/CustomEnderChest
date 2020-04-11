@@ -42,10 +42,10 @@ public class EnderChestUtils {
 		chestTitle.set(0, chestTitle.get(0).replaceAll("%player", p.getName()));
 		
 		if (chestTitle.get(0).length() <= 32) {
-			String enderChestTitle = chestTitle.get(0).replaceAll("&", "ง");
+			String enderChestTitle = chestTitle.get(0).replaceAll("&", "ยง");
 			return enderChestTitle;
 		} else {
-			String enderChestTitle = chestTitle.get(0).substring(0, 32).replaceAll("&", "ง");
+			String enderChestTitle = chestTitle.get(0).substring(0, 32).replaceAll("&", "ยง");
 			return enderChestTitle;
 		}
 	}
@@ -54,9 +54,9 @@ public class EnderChestUtils {
 		String chestTitle = ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "" + p.getName() + "'s " + ChatColor.LIGHT_PURPLE + "Ender Chest";
 
 		if (chestTitle.length() <= 32) {
-			return chestTitle.replaceAll("&", "ง");
+			return chestTitle.replaceAll("&", "ยง");
 		} else {
-			return chestTitle.substring(0, 32).replaceAll("&", "ง");
+			return chestTitle.substring(0, 32).replaceAll("&", "ยง");
 		}
 	}
     
@@ -64,9 +64,9 @@ public class EnderChestUtils {
 		String chestTitle = ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "" + enderchest.getStorageInterface().loadName(p) + "'s " + ChatColor.LIGHT_PURPLE + "Ender Chest";
 
 		if (chestTitle.length() <= 32) {
-			return chestTitle.replaceAll("&", "ง");
+			return chestTitle.replaceAll("&", "ยง");
 		} else {
-			return chestTitle.substring(0, 32).replaceAll("&", "ง");
+			return chestTitle.substring(0, 32).replaceAll("&", "ยง");
 		}
 	}
     

@@ -265,23 +265,23 @@ private EnderChest enderchest;
 	public void sendHelp(Player p) {
 		enderchest.getSoundHandler().sendAnvilLandSound(p);
 		for (String h : enderchest.getConfigHandler().getStringList("chatMessages.Help.header")) {
-			p.sendMessage(h.replaceAll("&", "ง"));
+			p.sendMessage(h.replaceAll("&", "ยง"));
 		}
 		if (p.hasPermission("CustomEnderChest.admin")) {
 			for (String h : enderchest.getConfigHandler().getStringList("chatMessages.Help.admin")) {
-				p.sendMessage(h.replaceAll("&", "ง"));
+				p.sendMessage(h.replaceAll("&", "ยง"));
 			}
 		} else {
 			for (String h : enderchest.getConfigHandler().getStringList("chatMessages.Help.user")) {
-				p.sendMessage(h.replaceAll("&", "ง"));
+				p.sendMessage(h.replaceAll("&", "ยง"));
 			}
 			if (p.hasPermission("CustomEnderChest.commands")) {
 				for (String h : enderchest.getConfigHandler().getStringList("chatMessages.Help.command")) {
-					p.sendMessage(h.replaceAll("&", "ง"));
+					p.sendMessage(h.replaceAll("&", "ยง"));
 				}
 			}
 			for (String h : enderchest.getConfigHandler().getStringList("chatMessages.Help.userFooter")) {
-				p.sendMessage(h.replaceAll("&", "ง"));
+				p.sendMessage(h.replaceAll("&", "ยง"));
 			}
 		}
 	}

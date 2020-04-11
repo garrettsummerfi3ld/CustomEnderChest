@@ -41,7 +41,7 @@ public class ConfigHandler {
 			enderchest.getLogger().severe("Could not locate " + key + " in the config.yml inside of the " + EnderChest.pluginName + " folder! (Try generating a new one by deleting the current)");
 			return "errorCouldNotLocateInConfigYml:" + key;
 		} else {
-			return enderchest.getConfig().getString(key).replaceAll("&", "ง");
+			return enderchest.getConfig().getString(key).replaceAll("&", "ยง");
 		}
 	}
 	
@@ -103,7 +103,7 @@ public class ConfigHandler {
 			
 			if (p != null) {				
 				//Message format
-				p.sendMessage(getString("chatMessages.prefix").replaceAll("&", "ง") + message.get(0).replaceAll("&", "ง"));
+				p.sendMessage(getString("chatMessages.prefix").replaceAll("&", "ยง") + message.get(0).replaceAll("&", "ยง"));
 			}
 				
 		} else {
