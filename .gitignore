@@ -1,4 +1,4 @@
-# JVM crash related
+﻿# JVM crash related
 core.[0-9]*
 hs_err_pid*
 
@@ -29,6 +29,7 @@ dependency-reduced-pom.xml
 # Gradle
 !gradle-wrapper.jar
 .gradle/
+gradle/
 build/
 */build/
 
