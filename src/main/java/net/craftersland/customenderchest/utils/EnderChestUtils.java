@@ -41,11 +41,9 @@ public class EnderChestUtils {
         chestTitle.set(0, chestTitle.get(0).replaceAll("%player", p.getName()));
 
         if (chestTitle.get(0).length() <= 32) {
-            String enderChestTitle = chestTitle.get(0).replaceAll("&", "§");
-            return enderChestTitle;
+            return chestTitle.get(0).replaceAll("&", "§");
         } else {
-            String enderChestTitle = chestTitle.get(0).substring(0, 32).replaceAll("&", "§");
-            return enderChestTitle;
+            return chestTitle.get(0).substring(0, 32).replaceAll("&", "§");
         }
     }
 
@@ -113,17 +111,16 @@ public class EnderChestUtils {
             Inventory newInv = Bukkit.getServer().createInventory(p, size, enderChestTitle);
             if (size > inv.getSize()) {
                 //TODO run this async to prevent tps drops on slow connections
-                if (enderchest.getStorageInterface().hasDataFile(p.getUniqueId()) == true) {
+                if (enderchest.getStorageInterface().hasDataFile(p.getUniqueId())) {
                     enderchest.getStorageInterface().loadEnderChest(p, newInv);
                 }
-                inv = newInv;
             } else {
                 for (int i = 0; i < size; i++) {
                     ItemStack item = inv.getItem(i);
                     newInv.setItem(i, item);
                 }
-                inv = newInv;
             }
+            inv = newInv;
         }
         enderchest.getDataHandler().setData(p.getUniqueId(), inv);
         enderchest.getSoundHandler().sendEnderchestOpenSound(p);

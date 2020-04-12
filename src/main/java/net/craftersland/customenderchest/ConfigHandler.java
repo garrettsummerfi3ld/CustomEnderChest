@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ConfigHandler {
 
@@ -18,11 +19,11 @@ public class ConfigHandler {
 
     public void loadConfig() {
         File pluginFolder = new File("plugins" + System.getProperty("file.separator") + EnderChest.pluginName);
-        if (pluginFolder.exists() == false) {
+        if (!pluginFolder.exists()) {
             pluginFolder.mkdir();
         }
         File configFile = new File("plugins" + System.getProperty("file.separator") + EnderChest.pluginName + System.getProperty("file.separator") + "config.yml");
-        if (configFile.exists() == false) {
+        if (!configFile.exists()) {
             EnderChest.log.info("No config file found! Creating new one...");
             enderchest.saveDefaultConfig();
         }
@@ -41,7 +42,7 @@ public class ConfigHandler {
             enderchest.getLogger().severe("Could not locate " + key + " in the config.yml inside of the " + EnderChest.pluginName + " folder! (Try generating a new one by deleting the current)");
             return "errorCouldNotLocateInConfigYml:" + key;
         } else {
-            return enderchest.getConfig().getString(key).replaceAll("&", "§");
+            return Objects.requireNonNull(enderchest.getConfig().getString(key)).replaceAll("&", "§");
         }
     }
 
@@ -97,6 +98,7 @@ public class ConfigHandler {
             List<String> message = new ArrayList<String>();
             String configMsg = enderchest.getConfig().getString(messageKey);
 
+            assert configMsg != null;
             if (configMsg.matches("")) return;
 
             message.add(configMsg);

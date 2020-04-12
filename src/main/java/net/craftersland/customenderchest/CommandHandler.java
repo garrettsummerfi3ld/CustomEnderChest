@@ -20,7 +20,7 @@ public class CommandHandler implements CommandExecutor {
 
     @Override
     public boolean onCommand(final CommandSender sender, final Command command, final String cmdlabel, final String[] args) {
-        Player p = null;
+        Player p;
 
         if (cmdlabel.equalsIgnoreCase("customec") || cmdlabel.equalsIgnoreCase("customenderchest") || cmdlabel.equalsIgnoreCase("ec")) {
             if (args.length == 0) {
@@ -54,20 +54,19 @@ public class CommandHandler implements CommandExecutor {
                             enderchest.getSoundHandler().sendFailedSound(p);
                             enderchest.getConfigHandler().printMessage(p, "chatMessages.noPermission");
                         }
-								/*if (p.hasPermission("CustomEnderChest.admin")) {
-									enderchest.getSoundHandler().sendFailedSound(p);
-									enderchest.getConfigHandler().printMessage(p, "chatMessages.openCmdUsage");
-									return false;
-								}*/
-                        return false;
+                        /*if (p.hasPermission("CustomEnderChest.admin")) {
+                            enderchest.getSoundHandler().sendFailedSound(p);
+                            enderchest.getConfigHandler().printMessage(p, "chatMessages.openCmdUsage");
+                            return false;
+                        }*/
                     } else {
                         sender.sendMessage(ChatColor.DARK_RED + ">> " + ChatColor.RED + "You can't run this command by console!");
-                        return false;
                     }
+                    return false;
                 } else if (args[0].equalsIgnoreCase("importfromflatfile")) {
                     if (sender instanceof Player) {
                         p = (Player) sender;
-                        if (p.hasPermission("CustomEnderChest.admin") == false) {
+                        if (!p.hasPermission("CustomEnderChest.admin")) {
                             enderchest.getSoundHandler().sendFailedSound(p);
                             enderchest.getConfigHandler().printMessage(p, "chatMessages.noPermission");
                             return true;
@@ -84,11 +83,10 @@ public class CommandHandler implements CommandExecutor {
                         }
                         enderchest.getSoundHandler().sendFailedSound(p);
                         enderchest.getConfigHandler().printMessage(p, "chatMessages.noPermission");
-                        return true;
                     } else {
                         sender.sendMessage(ChatColor.DARK_RED + ">> " + ChatColor.RED + "Usage example: " + ChatColor.GRAY + "/customec delete John" + ChatColor.RED + " or " + ChatColor.GRAY + "/customec delete f694517d-d6cf-32f1-972b-dfc677ceac45");
-                        return true;
                     }
+                    return true;
                 } else if (args[0].equalsIgnoreCase("reload")) {
                     if (sender instanceof Player) {
                         p = (Player) sender;
@@ -100,21 +98,19 @@ public class CommandHandler implements CommandExecutor {
                         }
                         enderchest.getSoundHandler().sendFailedSound(p);
                         enderchest.getConfigHandler().printMessage(p, "chatMessages.noPermission");
-                        return true;
                     } else {
                         enderchest.getConfigHandler().loadConfig();
                         sender.sendMessage(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + ">> " + ChatColor.GREEN + "Configuration reloaded!");
-                        return true;
                     }
+                    return true;
                 } else {
                     if (sender instanceof Player) {
                         p = (Player) sender;
                         sendHelp(p);
-                        return false;
                     } else {
                         sendConsoleHelp(sender);
-                        return false;
                     }
+                    return false;
                 }
             } else if (args.length == 2) {
                 if (args[0].equalsIgnoreCase("open")) {
@@ -160,16 +156,15 @@ public class CommandHandler implements CommandExecutor {
                         }
                         enderchest.getSoundHandler().sendFailedSound(p);
                         enderchest.getConfigHandler().printMessage(p, "chatMessages.noPermission");
-                        return false;
                     } else {
                         sender.sendMessage(ChatColor.DARK_RED + ">> " + ChatColor.RED + "You can't run this command by console!");
-                        return false;
                     }
+                    return false;
                 } else if (args[0].equalsIgnoreCase("importfromflatfile")) {
                     if (args[1].equalsIgnoreCase("overwrite")) {
                         if (sender instanceof Player) {
                             p = (Player) sender;
-                            if (p.hasPermission("CustomEnderChest.admin") == false) {
+                            if (!p.hasPermission("CustomEnderChest.admin")) {
                                 enderchest.getSoundHandler().sendFailedSound(p);
                                 enderchest.getConfigHandler().printMessage(p, "chatMessages.noPermission");
                                 return true;
@@ -251,11 +246,10 @@ public class CommandHandler implements CommandExecutor {
                     if (sender instanceof Player) {
                         p = (Player) sender;
                         sendHelp(p);
-                        return false;
                     } else {
                         sendConsoleHelp(sender);
-                        return false;
                     }
+                    return false;
                 }
             }
         }

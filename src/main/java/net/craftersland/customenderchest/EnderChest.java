@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -33,7 +34,7 @@ public class EnderChest extends JavaPlugin {
     private static SoundHandler sH;
     private static ModdedSerializer ms;
     private static FileToMysqlCmd ftmc;
-    public Map<Inventory, UUID> admin = new HashMap<Inventory, UUID>();
+    public Map<Inventory, UUID> admin = new HashMap<>();
 
     public void onEnable() {
         log = getLogger();
@@ -41,14 +42,14 @@ public class EnderChest extends JavaPlugin {
         configHandler = new ConfigHandler(this);
         checkForModdedNBTsupport();
         enderchestUtils = new EnderChestUtils(this);
-        if (configHandler.getString("database.typeOfDatabase").equalsIgnoreCase("mysql") == true) {
+        if (configHandler.getString("database.typeOfDatabase").equalsIgnoreCase("mysql")) {
             log.info("Using MySQL database for data.");
             mysqlSetup = new MysqlSetup(this);
             storageInterface = new MysqlStorage(this);
         } else {
             log.info("Using FlatFile system for data. IMPORTANT! We recommend MySQL.");
             File pluginFolder = new File("plugins" + System.getProperty("file.separator") + pluginName + System.getProperty("file.separator") + "PlayerData");
-            if (pluginFolder.exists() == false) {
+            if (!pluginFolder.exists()) {
                 pluginFolder.mkdir();
             }
             storageInterface = new FlatFileStorage(this);
@@ -59,9 +60,9 @@ public class EnderChest extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerHandler(this), this);
         CommandHandler cH = new CommandHandler(this);
-        getCommand("customec").setExecutor(cH);
-        getCommand("ec").setExecutor(cH);
-        getCommand("customenderchest").setExecutor(cH);
+        Objects.requireNonNull(getCommand("customec")).setExecutor(cH);
+        Objects.requireNonNull(getCommand("ec")).setExecutor(cH);
+        Objects.requireNonNull(getCommand("customenderchest")).setExecutor(cH);
         log.info(pluginName + " loaded successfully!");
     }
 
@@ -134,7 +135,7 @@ public class EnderChest extends JavaPlugin {
     }
 
     private void checkForModdedNBTsupport() {
-        if (configHandler.getBoolean("settings.modded-NBT-data-support") == true) {
+        if (configHandler.getBoolean("settings.modded-NBT-data-support")) {
             if (configHandler.getString("database.typeOfDatabase").equalsIgnoreCase("mysql")) {
                 if (Bukkit.getPluginManager().getPlugin("ProtocolLib") != null) {
                     ms = new ModdedSerializer(this);

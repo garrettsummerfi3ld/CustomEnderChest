@@ -44,7 +44,7 @@ public class MysqlSetup {
     }
 
     private void databaseMaintenanceTask() {
-        if (enderchest.getConfigHandler().getBoolean("database.mysql.removeOldUsers.enabled") == true) {
+        if (enderchest.getConfigHandler().getBoolean("database.mysql.removeOldUsers.enabled")) {
             Bukkit.getScheduler().runTaskLaterAsynchronously(enderchest, new Runnable() {
 
                 @Override
@@ -80,7 +80,7 @@ public class MysqlSetup {
             //Connect to database
             conn = DriverManager.getConnection("jdbc:mysql://" + enderchest.getConfigHandler().getString("database.mysql.host") + ":" + enderchest.getConfigHandler().getString("database.mysql.port") + "/" + enderchest.getConfigHandler().getString("database.mysql.databaseName"), properties);
             EnderChest.log.info("Database connection established!");
-            if (tablesChecked == false) {
+            if (!tablesChecked) {
                 setupTables();
             }
         } catch (ClassNotFoundException e) {
@@ -143,7 +143,7 @@ public class MysqlSetup {
                 EnderChest.log.warning("Database connection failed. Reconnecting...");
                 conn = null;
                 connectToDatabase();
-            } else if (conn.isClosed() == true) {
+            } else if (conn.isClosed()) {
                 EnderChest.log.warning("Database connection failed. Reconnecting...");
                 conn = null;
                 connectToDatabase();

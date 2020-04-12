@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface StorageInterface {
 
     //Storage Flat File data methods
-	boolean hasDataFile(UUID playerUUID);
+    boolean hasDataFile(UUID playerUUID);
 
     boolean deleteDataFile(UUID playerUUID);
 
@@ -25,6 +25,6 @@ public interface StorageInterface {
     Integer loadSize(UUID playerUUID);
 
     //For import command only
-	void saveEnderChest(UUID uuid, Inventory endInv, String playerName, int invSize);
+    void saveEnderChest(UUID uuid, Inventory endInv, String playerName, int invSize);
 
 }

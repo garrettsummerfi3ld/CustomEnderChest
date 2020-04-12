@@ -111,7 +111,7 @@ public class FlatFileStorage implements StorageInterface {
                 ItemStack item = ymlFormat.getItemStack("EnderChestInventory." + i);
                 items.add(item);
             }
-            ItemStack[] itemsList = items.toArray(new ItemStack[items.size()]);
+            ItemStack[] itemsList = items.toArray(new ItemStack[0]);
             storageInv.setContents(itemsList);
             if (inv.getSize() >= storageSize) {
                 for (int i = 0; i < inv.getSize(); i++) {
@@ -149,7 +149,7 @@ public class FlatFileStorage implements StorageInterface {
                 ItemStack item = ymlFormat.getItemStack("EnderChestInventory." + i);
                 items.add(item);
             }
-            ItemStack[] itemsList = items.toArray(new ItemStack[items.size()]);
+            ItemStack[] itemsList = items.toArray(new ItemStack[0]);
             storageInv.setContents(itemsList);
             if (inv.getSize() >= storageSize) {
                 for (int i = 0; i < inv.getSize(); i++) {
@@ -187,7 +187,7 @@ public class FlatFileStorage implements StorageInterface {
             ItemStack item = ymlFormat.getItemStack("EnderChestInventory." + i);
             items.add(item);
         }
-        ItemStack[] itemsList = items.toArray(new ItemStack[items.size()]);
+        ItemStack[] itemsList = items.toArray(new ItemStack[0]);
         inv.setContents(itemsList);
         items.clear();
         return true;
@@ -203,7 +203,7 @@ public class FlatFileStorage implements StorageInterface {
             ItemStack item = ymlFormat.getItemStack("EnderChestInventory." + i);
             items.add(item);
         }
-        ItemStack[] itemsList = items.toArray(new ItemStack[items.size()]);
+        ItemStack[] itemsList = items.toArray(new ItemStack[0]);
         inv.setContents(itemsList);
         items.clear();
         return true;
@@ -217,8 +217,7 @@ public class FlatFileStorage implements StorageInterface {
         }
         File dataFile = new File("plugins" + System.getProperty("file.separator") + "CustomEnderChest" + System.getProperty("file.separator") + "PlayerData", playerUUID + ".yml");
         FileConfiguration ymlFormat = YamlConfiguration.loadConfiguration(dataFile);
-        String name = ymlFormat.getString("PlayerLastName");
-        return name;
+        return ymlFormat.getString("PlayerLastName");
     }
 
     //load chest size from storage file
@@ -229,8 +228,7 @@ public class FlatFileStorage implements StorageInterface {
         }
         File dataFile = new File("plugins" + System.getProperty("file.separator") + "CustomEnderChest" + System.getProperty("file.separator") + "PlayerData", playerUUID + ".yml");
         FileConfiguration ymlFormat = YamlConfiguration.loadConfiguration(dataFile);
-        Integer size = ymlFormat.getInt("EnderChestSize");
-        return size;
+        return ymlFormat.getInt("EnderChestSize");
     }
 
     //Delete a data file if there is none

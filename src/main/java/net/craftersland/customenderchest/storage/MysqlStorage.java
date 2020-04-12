@@ -114,6 +114,7 @@ public class MysqlStorage implements StorageInterface {
             } else {
                 Inventory storageInv = decodeInventory(getEnderchestString(uuid), null, storageSize);
                 for (int i = 0; i < endInv.getSize(); i++) {
+                    assert storageInv != null;
                     storageInv.setItem(i, endInv.getItem(i));
                 }
                 preparedUpdateStatement.setString(1, encodeInventory(storageInv, uuid.toString()));
@@ -181,6 +182,7 @@ public class MysqlStorage implements StorageInterface {
                 for (int i = 0; i < endInv.getSize(); i++) {
                     ItemStack item = endInv.getItem(i);
                     if (item != null) {
+                        assert storageInv != null;
                         storageInv.setItem(i, item);
                     }
                 }

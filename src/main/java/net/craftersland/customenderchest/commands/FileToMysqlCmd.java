@@ -32,6 +32,7 @@ public class FileToMysqlCmd {
                         @Override
                         public void run() {
                             File[] fileList = dataFolder.listFiles();
+                            assert fileList != null;
                             EnderChest.log.info("Starting importing data from flatfile to mysql! " + fileList.length + " files found...");
                             int progress = 0;
                             for (File f : fileList) {
@@ -39,7 +40,7 @@ public class FileToMysqlCmd {
                                 try {
                                     if (f.getName().endsWith(".yml")) {
                                         UUID playerUUID = UUID.fromString(f.getName().substring(0, 36));
-                                        if (pl.getStorageInterface().hasDataFile(playerUUID) == false) {
+                                        if (!pl.getStorageInterface().hasDataFile(playerUUID)) {
                                             //Import skipping existing database data.
                                             FileConfiguration ymlFormat = YamlConfiguration.loadConfiguration(f);
                                             int invSize = ymlFormat.getInt("EnderChestSize");
