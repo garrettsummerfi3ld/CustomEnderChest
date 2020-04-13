@@ -5,7 +5,7 @@ author: CraftersLand
 website: www.craftersland.net
 load: STARTUP
 softdepend: [ProtocolLib]
-api-version: 1.13
+api-version: "1.13"
 commands:
     ec:
         description: The short command.

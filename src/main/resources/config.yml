@@ -1,7 +1,7 @@
-# default config.yml for CustomEnderChest
+# Default config.yml for CustomEnderChest
 # config version 1.12.2
 
-#Database settings
+# Database settings
 database:
     #Type of database, Options: FlatFile or MySQL
     typeOfDatabase: FlatFile
@@ -14,55 +14,55 @@ database:
         user: 'admin'
         password: 'cheesecake'
         ssl: false
-        #This task will scan the mysql database for inactive players and remove them.
-        #The scanning takes place after server starts with a 2min delay. Runs on a async thread so server performance will not be affected.
+        # This task will scan the mysql database for inactive players and remove them.
+        # The scanning takes place after server starts with a 2min delay. Runs on a async thread so server performance will not be affected.
         removeOldUsers:
-            #Enable or disable mysql database maintenance. | (true or false)
+            # Enable or disable mysql database maintenance. | (true or false)
             enabled: false
-            #Inactivity in days. Default 60 days.
+            # Inactivity in days. Default 60 days.
             inactive: 60
             
 
-#Extra plugin settings.            
+# Extra plugin settings.
 settings:
-    #Add NBT data support for modded items. Requires MySQL storage and ProtocolLib dependency installed.
-    #NOTE!!! - Changes to this setting needs a server restart!
+    # Add NBT data support for modded items. Requires MySQL storage and ProtocolLib dependency installed.
+    # NOTE!!! - Changes to this setting needs a server restart!
     modded-NBT-data-support: false
-    #Disable click the enderchest to open the custom enderchest. (Useful if you only want to open it with the command)
+    # Disable click the enderchest to open the custom enderchest. (Useful if you only want to open it with the command)
     disable-enderchest-click: false
-    #Disable all sounds triggered by this plugin.
+    # Disable all sounds triggered by this plugin.
     disable-sounds: false
 
-#Customize Ender Chest Title
+# Customize Ender Chest Title
 enderChestTitle:
-    #EnderChest folder name. Supports color and format codes.
-    #Minecraft Color and Format Codes: http://minecraft.gamepedia.com/Formatting_codes
-    #WARNING! Max size is 32 characters including color, format codes.
+    # EnderChest folder name. Supports color and format codes.
+    # Minecraft Color and Format Codes: http://minecraft.gamepedia.com/Formatting_codes
+    # WARNING! Max size is 32 characters including color, format codes.
     enderChestName: '&5&lEnderChest &7- %level'
-    #The place holder  %player  will be replaced by player's name.
-    #The  %level  place holder replace text below. So you can customize each enderchest title by enderchest size.
+    # The place holder  %player  will be replaced by player's name.
+    # The  %level  place holder replace text below. So you can customize each enderchest title by enderchest size.
    
-    #For 9 slots enderchest.
+    # For 9 slots enderchest.
     level0: '&dLevel 0'
-    #For 18 slots enderchest.
+    # For 18 slots enderchest.
     level1: '&dLevel 1'
-    #For 27 slots enderchest.
+    # For 27 slots enderchest.
     level2: '&dLevel 2'
-    #For 36 slots enderchest.
+    # For 36 slots enderchest.
     level3: '&5Level 3'
-    #For 45 slots enderchest.
+    # For 45 slots enderchest.
     level4: '&5Level 4'
-    #For 54 slots enderchest.
+    # For 54 slots enderchest.
     level5: '&5Level 5'
 
-#Chat messages. Supports color and format codes. 
+# Chat messages. Supports color and format codes.
 chatMessages:
-    #Chat messages prefix.
-    #To disable the prefix set it to '' ; Example: prefix: ''
+    # Chat messages prefix.
+    # To disable the prefix set it to '' ; Example: prefix: ''
     prefix: '&5&l[CustomEC] '
     
-    #Disable any chat message by setting it to '' | Example: noPermission: ''
-    #Chat messages.
+    # Disable any chat message by setting it to '' | Example: noPermission: ''
+    # Chat messages.
     noPermission: '&dYou do not have permission!'
     openCmdUsage: '&dUsage example: &7/customec open John &dor &7/customec open f694517d-d6cf-32f1-972b-dfc677ceac45'
     noEnderchest: '&dPlayer does not have and Ender Chest yet!'
@@ -73,14 +73,14 @@ chatMessages:
     delete: '&dPlayer enderchest data removed!'
     reloadFail: '&dCould not load config! Check logs!'
     reload: '&dConfiguration reloaded!'
-    flatfileImport-mysql: '&dChange database type from flatfile to mysql first!'
+    flatfileImport-mysql: '&dChange database type from FlatFile to MySQL first!'
     flatfileImport-connection: '&dNo database connection found! Check logs and make sure the plugin is connected to the mysql database!'
     flatfileImport-started: '&dImport task started! Check server console for progress.'
     flatfileImport-datafolder: '&dThe PlayerData folder could not be found!'
     reloadCmdWarning: '&cCustomEnderchest does not recommend server reloads. If you have issues after running this command stop using it.'
     joinDelay: '&cYour data is loading, please wait...'
     
-    #Help command with multi line support.
+    # Help command with multi line support.
     Help:
         header:
         - ' '
