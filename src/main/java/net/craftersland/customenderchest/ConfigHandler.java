@@ -20,11 +20,12 @@ public class ConfigHandler {
     public void loadConfig() {
         File pluginFolder = new File("plugins" + System.getProperty("file.separator") + EnderChest.pluginName);
         if (!pluginFolder.exists()) {
+            EnderChest.log.warning("No plugin directory found! Creating directory...");
             pluginFolder.mkdir();
         }
         File configFile = new File("plugins" + System.getProperty("file.separator") + EnderChest.pluginName + System.getProperty("file.separator") + "config.yml");
         if (!configFile.exists()) {
-            EnderChest.log.info("No config file found! Creating new one...");
+            EnderChest.log.warning("No config file found! Creating new one...");
             enderchest.saveDefaultConfig();
         }
         try {

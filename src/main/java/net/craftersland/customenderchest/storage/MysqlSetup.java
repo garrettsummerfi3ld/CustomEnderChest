@@ -52,8 +52,8 @@ public class MysqlSetup {
                     if (conn != null) {
                         long inactivityDays = Long.parseLong(enderchest.getConfigHandler().getString("database.mysql.removeOldUsers.inactive"));
                         long inactivityMils = inactivityDays * 24 * 60 * 60 * 1000;
-                        long curentTime = System.currentTimeMillis();
-                        long inactiveTime = curentTime - inactivityMils;
+                        long currentTime = System.currentTimeMillis();
+                        long inactiveTime = currentTime - inactivityMils;
                         EnderChest.log.info("Database maintenance task started...");
                         tableMaintenance(inactiveTime, getConnection(), enderchest.getConfigHandler().getString("database.mysql.tableName"));
                         EnderChest.log.info("Database maintenance complete!");
@@ -66,7 +66,7 @@ public class MysqlSetup {
 
     private void connectToDatabase() {
         try {
-            //Load Drivers
+            // Load Drivers
             Class.forName("com.mysql.jdbc.Driver");
 
             Properties properties = new Properties();
@@ -76,8 +76,10 @@ public class MysqlSetup {
             properties.setProperty("verifyServerCertificate", "false");
             properties.setProperty("useSSL", enderchest.getConfigHandler().getString("database.mysql.ssl"));
             properties.setProperty("requireSSL", enderchest.getConfigHandler().getString("database.mysql.ssl"));
+            properties.setProperty("useUnicode", "true");
+            properties.setProperty("characterEncoding", "utf-8");
 
-            //Connect to database
+            // Connect to database
             conn = DriverManager.getConnection("jdbc:mysql://" + enderchest.getConfigHandler().getString("database.mysql.host") + ":" + enderchest.getConfigHandler().getString("database.mysql.port") + "/" + enderchest.getConfigHandler().getString("database.mysql.databaseName"), properties);
             EnderChest.log.info("Database connection established!");
             if (!tablesChecked) {

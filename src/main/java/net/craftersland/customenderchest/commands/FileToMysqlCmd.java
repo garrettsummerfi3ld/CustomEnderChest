@@ -54,7 +54,7 @@ public class FileToMysqlCmd {
                                             inv.setContents(itemsList);
                                             items.clear();
                                             pl.getStorageInterface().saveEnderChest(playerUUID, inv, ymlFormat.getString("PlayerLastName"), invSize);
-                                        } else if (overwrite == true) {
+                                        } else if (overwrite) {
                                             //Import overwriting existing data.
                                             FileConfiguration ymlFormat = YamlConfiguration.loadConfiguration(f);
                                             int invSize = ymlFormat.getInt("EnderChestSize");

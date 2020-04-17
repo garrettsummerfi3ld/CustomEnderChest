@@ -14,10 +14,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class EnderChest extends JavaPlugin {
@@ -82,66 +79,58 @@ public class EnderChest extends JavaPlugin {
     }
 
     private boolean getMcVersion() {
+        log.info("Getting Minecraft Version...");
         String[] serverVersion = Bukkit.getBukkitVersion().split("-");
         String version = serverVersion[0];
+        String[] legacyVersions = new String[]{"1.7.10", "1.7.9", "1.7.5", "1.7.2", "1.8.8", "1.8.3", "1.8.3", "1.8.4", "1.8"};
+        String[] CombatUpdateVersions = new String[]{"1.9", "1.9.1", "1.9.2", "1.9.3", "1.9.4", "1.10", "1.10.1", "1.10.2", "1.11", "1.11.1", "1.11.2", "1.12", "1.12.1", "1.12.2"};
+        String[] AquaticUpdateVersions = new String[]{"1.13", "1.13.1", "1.13.2", "1.14", "1.14.1", "1.14.2", "1.14.3", "1.14.4"};
+        String[] BeeUpdateVersions = new String[]{"1.15", "1.15.1", "1.15.2"};
 
-        if (version.matches("1.7.10") || version.matches("1.7.9") || version.matches("1.7.5") || version.matches("1.7.2") || version.matches("1.8.8") || version.matches("1.8.3") || version.matches("1.8.4") || version.matches("1.8")) {
+        if (version.matches(Arrays.toString(legacyVersions))) {
             is19Server = false;
             is13Server = false;
             log.info("Compatible server version detected: " + version);
+            log.info("Running older versions of CraftBukkit, running legacy APIs...");
             return true;
-        } else if (version.matches("1.9") || version.matches("1.9.1") || version.matches("1.9.2") || version.matches("1.9.3") || version.matches("1.9.4")) {
+        } else if (version.matches(Arrays.toString(CombatUpdateVersions))) {
             is19Server = true;
             is13Server = false;
             log.info("Compatible server version detected: " + version);
+            log.info("Running plugin with CombatUpdate APIs...");
             return true;
-        } else if (version.matches("1.10") || version.matches("1.10.1") || version.matches("1.10.2")) {
-            is19Server = true;
-            is13Server = false;
-            log.info("Compatible server version detected: " + version);
-            return true;
-        } else if (version.matches("1.11") || version.matches("1.11.1") || version.matches("1.11.2")) {
-            is19Server = true;
-            is13Server = false;
-            log.info("Compatible server version detected: " + version);
-            return true;
-        } else if (version.matches("1.12") || version.matches("1.12.1") || version.matches("1.12.2")) {
-            is19Server = true;
-            is13Server = false;
-            log.info("Compatible server version detected: " + version);
-            return true;
-        } else if (version.matches("1.13") || version.matches("1.13.1") || version.matches("1.13.2")) {
+        } else if (version.matches(Arrays.toString(AquaticUpdateVersions))) {
             is19Server = true;
             is13Server = true;
             log.info("Compatible server version detected: " + version);
+            log.info("Running plugin with AquaticUpdate APIs...");
             return true;
-        } else if (version.matches("1.14") || version.matches("1.14.1") || version.matches("1.14.2") || version.matches("1.14.3") || version.matches("1.14.4")) {
+        } else if (version.matches(Arrays.toString(BeeUpdateVersions))) {
             is19Server = true;
             is13Server = true;
             log.info("Compatible server version detected: " + version);
-            return true;
-        } else if (version.matches("1.15") || version.matches("1.15.1") || version.matches("1.15.2")) {
-            is19Server = true;
-            is13Server = true;
-            log.info("Compatible server version detected: " + version);
+            log.info("Running plugin with BuzzyBees APIs...");
             return true;
         } else {
             //Default fallback to 1.15 API
             is19Server = true;
             is13Server = true;
-            log.info("Incompatible server version detected: " + version + " . Running into 1.15 API mode.");
+            log.warning("Incompatible/unknown server version detected: " + version);
+            log.warning("Running plug with BuzzyBees APIs as fallback. If you think this is an error please submit a issue on our GitHub.");
         }
         return false;
     }
 
     private void checkForModdedNBTsupport() {
+        log.info("Checking NBT support from settings...");
         if (configHandler.getBoolean("settings.modded-NBT-data-support")) {
+            log.info("NBT support is set 'true' in your 'config.yml'...");
             if (configHandler.getString("database.typeOfDatabase").equalsIgnoreCase("mysql")) {
                 if (Bukkit.getPluginManager().getPlugin("ProtocolLib") != null) {
                     ms = new ModdedSerializer(this);
-                    log.info("ProtocolLib dependency found. Modded NBT data support is enabled!");
+                    log.info("Soft dependency 'ProtocolLib' found. Modded NBT data support is enabled!");
                 } else {
-                    log.warning("ProtocolLib dependency not found!!! Modded NBT data support is disabled!");
+                    log.warning("Soft dependency 'ProtocolLib' not found! Modded NBT data support is disabled! Is 'ProtocolLib' in your 'plugins' folder?");
                 }
             } else {
                 log.warning("NBT Modded data support only works for MySQL storage. Modded NBT data support is disabled!");
